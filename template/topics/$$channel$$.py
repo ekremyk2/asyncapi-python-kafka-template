@@ -49,8 +49,8 @@ def delivery_report(err, msg):
 
 if __name__ == '__main__':
     broker_url = '{{ servers.kafka.url }}'
-    topic_name = '{{ default(kafka.default.topic, "my-topic") }}'
-    group_id = '{{ default(kafka.default.consumer.groupId, "my-group") }}'
+    topic_name = '{{ "my-topic" }}'
+    group_id = '{{ "my-group" }}'
 
     # Create consumer and start consuming messages in a separate thread
     consumer = create_consumer(broker_url, topic_name, group_id)
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
     # Create producer and produce a message
     producer = create_producer(broker_url)
-    message = '{{ default(kafka.default.message, "Hello, world!") }}'
+    message = '{{ "Hello, world!" }}'
     produce_messages(producer, topic_name, message)
 
     # Wait for consumer to finish consuming messages
