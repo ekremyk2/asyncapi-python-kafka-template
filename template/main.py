@@ -1,6 +1,6 @@
 from confluent_kafka import Producer
 from confluent_kafka import Consumer
-{% for channel_name, channel_info in asyncapi.channels.items() %}
+{% for channel_name, channel_info in asyncapi.channels() %}
 from topics.{{ channel_name }} import {{ channel_name }}Consumer, {{ channel_name }}Producer
 {% endfor %}
 
@@ -14,7 +14,7 @@ consumer = Consumer({
     'auto.offset.reset': 'earliest'
 })
 
-{% for channel_name, channel_info in asyncapi.channels.items() %}
+{% for channel_name, channel_info in asyncapi.channels() %}
 # Subscribe to the Kafka topic for {{ channel_name }} channel
 {{ channel_name|lower }}_topic = '{{ channel_info.subscribe().topic }}'
 consumer.subscribe([{{ channel_name|lower }}_topic])
