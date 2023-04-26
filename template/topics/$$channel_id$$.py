@@ -1,12 +1,8 @@
 from confluent_kafka.admin import AdminClient, NewTopic
 from confluent_kafka import Consumer, Producer
 import threading
-{ % if asyncapi.info.title - %}
-# {{ asyncapi.info.title }}
-{ % endif - %}
-{ % if asyncapi.info.version - % }
-# v{{asyncapi.info.version}}
-{ % endif - %}
+{ % if asyncapi.info.title - %}"""{{ asyncapi.info.title }}"""{ % endif - %}
+{ % if asyncapi.info.version - % }"""v{{asyncapi.info.version}}"""{ % endif - %}
 
 
 def create_consumer(broker_url: str, topic: str, group_id: str):
