@@ -37,7 +37,7 @@ class Producer:
     def create_producer(broker_url: str):
         return Producer({'bootstrap.servers': broker_url})
         
-    def produce_messages(producer: Producer, topic: "{{ channel_name }}", message: {% if schema %}{{ modelClass('Payload', schema.properties(), schema.required(), 0 ) }}{% endif %}):
+    def produce_messages(producer: Producer, topic: str, message: str):
         producer.produce(topic, message.encode('utf-8'), callback=delivery_report)
         producer.flush()
 
@@ -50,7 +50,7 @@ class Producer:
 
     if __name__ == '__main__':
         broker_url = '{{ servers.kafka.url }}'
-        topic_name = '{{ "my-topic" }}'
+        topic_name = '{{ channel_name }}'
         group_id = '{{ "my-group" }}'
 
         # Create consumer and start consuming messages in a separate thread
