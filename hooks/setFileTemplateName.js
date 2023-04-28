@@ -9,7 +9,7 @@ module.exports = {
   'generate:before': (generator) => {
     const asyncapi = generator.asyncapi;
     for (let [key, value] of Object.entries(asyncapi.channels())){
-      console.log(key);
+      console.log(key, value);
       let newKey = key;
       while (newKey.includes('-') || newKey.includes('.') || newKey.includes('/')){
         newKey = newKey.replace("-", "_").replace(".", "_").replace("/", "_");
