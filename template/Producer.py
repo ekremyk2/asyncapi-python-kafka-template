@@ -19,7 +19,7 @@ class producer:
     def __init__(self, broker_url: str):
         self.producer = Producer({'bootstrap.servers': broker_url})
 
-    def produce_message(self, topic: str, message: entity):
+    def produce_message(self, topic: str, message: Entity):
         if self.producer is None:
             raise Exception("Producer intance should be initialized first!")
         msgJson = message.to_json()

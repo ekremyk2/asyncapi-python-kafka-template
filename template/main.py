@@ -8,15 +8,11 @@ from schemas.{{schema_name}} import {{schema_name}}
 KAFKA_BROKERS = '{{ asyncapi.servers().test._json.url }}'
 
 # Create a Kafka consumer
-consumerInstance = consumer({
-    'bootstrap.servers': KAFKA_BROKERS,
-    'group.id': 'my-group',
-})
+consumerInstance = consumer(
+    broker_url=KAFKA_BROKERS, group_id='my-group')
 
 # Create a Kafka producer
-producerInstance = producer({
-    'bootstrap.servers': KAFKA_BROKERS
-})
+producerInstance = producer(broker_url=KAFKA_BROKERS)
 
 {% for channel_name, channel in asyncapi.channels() -%}
 {% if channel.hasSubscribe() -%}
