@@ -1,17 +1,14 @@
 module.exports = {
-  'setFileTemplateName': (generator, hookArguments) => {
-    let currentFilename = hookArguments.originalFilename;
-    while (currentFilename.includes('-') || currentFilename.includes('.') || currentFilename.includes('/')){
-      currentFilename = currentFilename.replace("-", "_").replace(".", "_").replace("/", "_");
-    }
-    return currentFilename;
-  },
-  'generate:before': (generator) => {
+  "generate:before": (generator) => {
     const asyncapi = generator.asyncapi;
-    for (let [key, value] of Object.entries(asyncapi.channels())){
+    for (let [key, value] of Object.entries(asyncapi.channels())) {
       console.log(key, value);
       let newKey = key;
-      while (newKey.includes('-') || newKey.includes('.') || newKey.includes('/')){
+      while (
+        newKey.includes("-") ||
+        newKey.includes(".") ||
+        newKey.includes("/")
+      ) {
         newKey = newKey.replace("-", "_").replace(".", "_").replace("/", "_");
       }
       asyncapi._json.channels[newKey] = asyncapi._json.channels[key];
@@ -19,5 +16,5 @@ module.exports = {
       console.log(newKey, asyncapi._json.channels[newKey]);
     }
     console.log(generator.asyncapi.channels());
-  }
+  },
 };

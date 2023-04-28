@@ -1,30 +1,31 @@
-from confluent_kafka import Producer
-from confluent_kafka import Consumer
-import importlib.util
-{% for channel_name, channel_info in asyncapi.channels() -%}
-from topics import {{ channel_name }}
-{% endfor -%}
+import template.Consumer as Consumer
+import template.Producer as Producer
+{% for channel_name, channel_info in asyncapi.channels() - %}
+from topics import {{channel_name}}
+{% endfor - %}
 
 # Set up Kafka configuration
 KAFKA_BROKERS = '{{ asyncapi.servers[0].url }}'
 
 # Create a Kafka consumer
-consumer = Consumer({
+consumerInstance = Consumer({
     'bootstrap.servers': KAFKA_BROKERS,
     'group.id': 'my-group',
-    'auto.offset.reset': 'earliest'
 })
 
-{% for channel_name, channel_info in asyncapi.channels() -%}
+producerInstance = Producer({
+    'bootstrap.servers': KAFKA_BROKERS
+})
+
+{% for channel_name, channel_info in asyncapi.channels() - %}
 # Subscribe to the Kafka topic for {{ channel_name }} channel
-{{ channel_name|lower }}_topic = '{{ channel_info.subscribe().topic }}'
-consumer.subscribe([{{ channel_name|lower }}_topic])
+consumerInstance.subscribeTo('{{ channel_info.subscribe().topic }}')
+{% endfor - %}
 
-# Create a {{ channel_name }} consumer and start consuming messages
-{{ channel_name|lower }}_consumer = {{ channel_name }}Consumer(KAFKA_BROKERS, {{ channel_name|lower }}_topic, consumer)
-{{ channel_name|lower }}_consumer.consume_messages()
 
-# Create a {{ channel_name }} producer and send a message
-{{ channel_name|lower }}_producer = {{ channel_name }}Producer(KAFKA_BROKERS, {{ channel_name|lower }}_topic, producer)
-{{ channel_name|lower }}_producer.produce_message('Hello, World!')
-{% endfor -%}
+def listenCallback(msg: str):
+    #write your business logic hereks
+    return
+
+
+consumerInstance.listen(listenCallback)
