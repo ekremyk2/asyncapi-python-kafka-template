@@ -1,6 +1,9 @@
 module.exports = {
   'setFileTemplateName': (generator, hookArguments) => {
     const currentFilename = hookArguments.originalFilename;
-    return currentFilename.replace("-", "_").replace(".", "_").replace("/", "_");
+    while (currentFilename.includes('-') || currentFilename.includes('.') || currentFilename.includes('/')){
+      currentFilename = currentFilename.replace("-", "_").replace(".", "_").replace("/", "_");
+    }
+    return currentFilename;
   },
 };
