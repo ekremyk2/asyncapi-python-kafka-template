@@ -1,5 +1,5 @@
 from confluent_kafka import Producer
-from schemas import entity
+from schemas.Entity import Entity
 import threading
 
 
