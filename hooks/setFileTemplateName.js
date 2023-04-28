@@ -7,6 +7,6 @@ module.exports = {
     return currentFilename;
   },
   'generate:before': (generator) => {
-    console.log(generator.asyncapi, generator.asyncapi.channels);
+    console.log(generator.asyncapi, generator.asyncapi.channels());
   }
 };
