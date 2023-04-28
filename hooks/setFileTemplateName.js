@@ -14,9 +14,9 @@ module.exports = {
       while (newKey.includes('-') || newKey.includes('.') || newKey.includes('/')){
         newKey = newKey.replace("-", "_").replace(".", "_").replace("/", "_");
       }
-      console.log(newKey);
-      asyncapi._json.channels[newKey] = value;
+      asyncapi._json.channels[newKey] = asyncapi._json.channels[key];
       delete asyncapi._json.channels[key];
+      console.log(newKey, asyncapi._json.channels[newKey]);
     }
     console.log(generator.asyncapi.channels());
   }
