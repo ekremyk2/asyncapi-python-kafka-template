@@ -9,5 +9,7 @@ class {{schema_name}}:
 {{"    "}}{{ typeInfo.pythonName }}{{ ": " + typeInfo.pythonName if typeInfo.pythonName else ""}}
 {%- else %}
 {{"    "}}pass
+
+
 {% endfor %}
 {% endfor %}
