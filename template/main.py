@@ -1,7 +1,7 @@
 from Consumer import consumer
 from Producer import producer
 {% for schema_name, schema in asyncapi.components().schemas() -%}
-from {{schemas}}.{{schema_name}} import {{schema_name}}
+from schemas.{{schema_name}} import {{schema_name}}
 {% endfor %}
 
 # Set up Kafka configuration
