@@ -6,10 +6,7 @@ module.exports = {
     }
     return currentFilename;
   },
-  'generate:before': (a, b, c) => {
-    console.log("generate:before", a, b, c)
-  },
-  'generate:after': (a, b, c) => {
-    console.log("generate:after", a, b, c)
+  'generate:before': (generator) => {
+    console.log(generator.asyncapi, generator.asyncapi.channels);
   }
 };
