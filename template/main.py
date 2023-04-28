@@ -1,8 +1,5 @@
 from Consumer import consumer
 from Producer import producer
-# {% for schema_name, schema in asyncapi.schemas() -%}
-# from schemas.schema_name import schema_name
-# {% endfor %}
 
 {% for channel_name, channel in asyncapi.channels() -%}
 {% if channel.hasSubscribe() -%}
