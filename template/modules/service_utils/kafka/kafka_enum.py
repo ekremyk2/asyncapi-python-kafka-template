@@ -4,7 +4,7 @@ from enum import Enum
 {% for name, prop in schema.properties() %}
 {% set tpyeInfo = [name, prop] | getTypeInfo %}
 {% if typeInfo.generalType === 'enum' %}
-class {{schema_name}}(str, Enum):
+class {{ typeInfo.pythonName }}(str, Enum):
 {% for v in typeInfo.enum %}
 {{"    "}}{{ v }} = '{{ v }}'
 {% endfor %}
