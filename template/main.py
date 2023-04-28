@@ -2,7 +2,7 @@ from confluent_kafka import Producer
 from confluent_kafka import Consumer
 import importlib.util
 {% for channel_name, channel_info in asyncapi.channels() -%}
-from topics.{{ channel_name }} import {{ channel_name }}Consumer, {{ channel_name }}Producer
+from topics import {{ channel_name }}
 {% endfor -%}
 
 # Set up Kafka configuration
