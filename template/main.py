@@ -1,8 +1,8 @@
 from Consumer import consumer
 from Producer import producer
-# {% for schema_name, schema in asyncapi.componenets().schemas() -%}
-# from {{schemas}}.{{schema_name}} import {{schema_name}}
-# {% endfor %}
+{% for schema_name, schema in asyncapi.components().schemas() -%}
+from {{schemas}}.{{schema_name}} import {{schema_name}}
+{% endfor %}
 
 # Set up Kafka configuration
 KAFKA_BROKERS = '{{ asyncapi.servers().test._json.url }}'
