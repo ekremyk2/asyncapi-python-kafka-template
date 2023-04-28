@@ -18,21 +18,21 @@ producerInstance = producer({
     'bootstrap.servers': KAFKA_BROKERS
 })
 
-{ % for channel_name, channel in asyncapi.channels() - %}
-{ % if channel.hasSubscribe() - %}
+{% for channel_name, channel in asyncapi.channels() -%}
+{% if channel.hasSubscribe() -%}
 # Subscribe to the Kafka topic for {{ channel_name }} channel
 consumerInstance.subscribeTo('{{ channel_name }}')
-{ % endif - %}
-{ % endfor % }
+{% endif -%}
+{% endfor %}
 
 
 def listenCallback(msg: str):
     # Write your business logic here
-    { % for channel_name, channel in asyncapi.channels() - %}
-    { % if channel.hasPublish() - %}
+    {% for channel_name, channel in asyncapi.channels() -%}
+    {% if channel.hasPublish() -%}
     # Produce messages to Kafka topic for {{ channel_name }} channel
-    { % endif - %}    
-    { % endfor % }
+    {% endif -%}    
+    {% endfor %}
     # producerInstance.produce_message("topic", Entity)
     print(msg)
     return
