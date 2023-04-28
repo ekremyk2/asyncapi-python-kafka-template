@@ -13,10 +13,8 @@ module.exports = {
       asyncapi._json.channels[newKey] = asyncapi._json.channels[key];
       delete asyncapi._json.channels[key];
     }
-    const hasSubscribeChannels = asyncapi.channels();
-    const channels = hasSubscribeChannels.filter((channl) => {
-      return channl.hasSubscribe();
+    Object.entries(asyncapi.channels()).map(([channelName, channel], index) => {
+      console.log(channel, channel.subscribe);
     });
-    console.log(channels.subscribe);
   },
 };
