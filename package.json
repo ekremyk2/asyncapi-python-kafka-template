@@ -1,6 +1,6 @@
 {
   "name": "@ekremyk2/python-kafka-template",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "Python kafka template for the AsyncAPI generator. Custom made for myself.",
   "main": "index.js",
   "scripts": {
