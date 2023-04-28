@@ -2,7 +2,7 @@ import template.Consumer as Consumer
 import template.Producer as Producer
 
 # Set up Kafka configuration
-KAFKA_BROKERS = '{{ asyncapi.servers()[0].url }}'
+KAFKA_BROKERS = '{{ asyncapi.servers().test._json.url }}'
 
 # Create a Kafka consumer
 consumerInstance = Consumer({
@@ -16,7 +16,7 @@ producerInstance = Producer({
 })
 
 {% for channel_name, channel_info in asyncapi.channels() -%}
-{% if channel.hasSubscribe() -%}
+{% if channel_info.hasSubscribe() -%}
 # Subscribe to the Kafka topic for {{ channel_name }} channel
 consumerInstance.subscribeTo('{{ channel_name }}')
 {% endif -%}
@@ -26,7 +26,7 @@ consumerInstance.subscribeTo('{{ channel_name }}')
 def listenCallback(msg: str):
     # Write your business logic here
     {% for channel_name, channel_info in asyncapi.channels() -%}
-    {% if channel.hasPublish() -%}
+    {% if channel_info.hasPublish() -%}
     # Produce messages to Kafka topic for {{ channel_name }} channel
     {% endif -%}    
     {% endfor %}
