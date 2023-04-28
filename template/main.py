@@ -1,8 +1,5 @@
 import template.Consumer as Consumer
 import template.Producer as Producer
-{% for channel_name, channel_info in asyncapi.channels() - %}
-from topics import {{channel_name}}
-{% endfor - %}
 
 # Set up Kafka configuration
 KAFKA_BROKERS = '{{ asyncapi.servers[0].url }}'
