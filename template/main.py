@@ -15,10 +15,10 @@ producerInstance = Producer({
     'bootstrap.servers': KAFKA_BROKERS
 })
 
-{% for channel_name, channel_info in asyncapi.channels() - %}
+{% for channel_name, channel_info in asyncapi.channels() %}
 # Subscribe to the Kafka topic for {{ channel_name }} channel
 consumerInstance.subscribeTo('{{ channel_info.subscribe().topic }}')
-{% endfor - %}
+{% endfor %}
 
 
 def listenCallback(msg: str):
