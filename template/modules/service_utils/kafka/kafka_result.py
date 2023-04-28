@@ -6,8 +6,8 @@ from kafka.kafka_result import *
 class {{schema_name}}:
 {% for name, prop in schema.properties() %}
 {% set typeInfo = [name, prop] | getTypeInfo -%}
-    {{ typeInfo.pythonName }}{{ ": " + typeInfo.pythonName if typeInfo.pythonName else ""}}
+{{"    "}}{{ typeInfo.pythonName }}{{ ": " + typeInfo.pythonName if typeInfo.pythonName else ""}}
 {%- else %}
-    pass
+{{"    "}}pass
 {% endfor %}
 {% endfor %}
