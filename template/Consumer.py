@@ -2,19 +2,20 @@ from confluent_kafka import Consumer
 import threading
 
 
-class Consumer:
+class consumer:
     __instance = None
     consumer = None
 
-    def __new__(self, broker_url: str, group_id: str):
-        if self.__instance is None:
-            self.__instance = self.createInstance(broker_url, group_id)
-            return self.__instance
+    def __new__(cls, broker_url: str, group_id: str):
+        if cls.__instance is None:
+            cls.__instance = super().__new__(cls)
+            cls.__instance.__init__(broker_url, group_id)
+            return cls.__instance
         else:
             raise Exception(
                 "Cannot create more than one instance of a singleton class.")
 
-    def createInstance(self, broker_url: str, group_id: str):
+    def __init__(self, broker_url: str, group_id: str):
         self.consumer = Consumer({
             'bootstrap.servers': broker_url,
             'group.id': group_id,
@@ -29,6 +30,7 @@ class Consumer:
     def listen(self, callback):
         if self.consumer is None:
             raise Exception("Consumer intance should be initialized first!")
+        print("Started Listening!")
         while True:
             msg = self.consumer.poll(1.0)
             if msg is None:

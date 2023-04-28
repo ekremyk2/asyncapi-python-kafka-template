@@ -1,17 +1,25 @@
-import template.Consumer as Consumer
-import template.Producer as Producer
+from Consumer import consumer
+from Producer import producer
+# {% for schema_name, schema in asyncapi.schemas() -%}
+# from schemas.schema_name import schema_name
+# {% endfor %}
+
+{% for channel_name, channel in asyncapi.channels() -%}
+{% if channel.hasSubscribe() -%}
+{% endif -%}
+{% endfor %}
 
 # Set up Kafka configuration
 KAFKA_BROKERS = '{{ asyncapi.servers().test._json.url }}'
 
 # Create a Kafka consumer
-consumerInstance = Consumer({
+consumerInstance = consumer({
     'bootstrap.servers': KAFKA_BROKERS,
     'group.id': 'my-group',
 })
 
 # Create a Kafka producer
-producerInstance = Producer({
+producerInstance = producer({
     'bootstrap.servers': KAFKA_BROKERS
 })
 
@@ -30,7 +38,7 @@ def listenCallback(msg: str):
     # Produce messages to Kafka topic for {{ channel_name }} channel
     {% endif -%}    
     {% endfor %}
-    # producerInstance.produce_message("topic", "message")
+    # producerInstance.produce_message("topic", Entity)
     print(msg)
     return
 
