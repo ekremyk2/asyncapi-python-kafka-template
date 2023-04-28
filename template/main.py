@@ -26,6 +26,7 @@ consumerInstance.subscribeTo('{{ channel_info.subscribe().topic }}')
 
 def listenCallback(msg: str):
     # Write your business logic here
+    # producerInstance.produce_message("topic", "message")
     print(msg)
     return
 
