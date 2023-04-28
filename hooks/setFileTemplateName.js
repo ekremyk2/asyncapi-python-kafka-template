@@ -7,6 +7,17 @@ module.exports = {
     return currentFilename;
   },
   'generate:before': (generator) => {
-    console.log(generator.asyncapi, generator.asyncapi.channels());
+    const asyncapi = generator.asyncapi;
+    for (let [key, value] of Object.entries(asyncapi.channels())){
+      console.log(key);
+      let newKey = key;
+      while (newKey.includes('-') || newKey.includes('.') || newKey.includes('/')){
+        newKey = newKey.replace("-", "_").replace(".", "_").replace("/", "_");
+      }
+      console.log(newKey);
+      asyncapi._json.channels[newKey] = value;
+      delete asyncapi._json.channels[key];
+    }
+    console.log(generator.asyncapi.channels());
   }
 };
