@@ -13,6 +13,7 @@ consumerInstance = Consumer({
     'group.id': 'my-group',
 })
 
+# Create a Kafka producer
 producerInstance = Producer({
     'bootstrap.servers': KAFKA_BROKERS
 })
@@ -24,7 +25,8 @@ consumerInstance.subscribeTo('{{ channel_info.subscribe().topic }}')
 
 
 def listenCallback(msg: str):
-    #write your business logic hereks
+    # Write your business logic here
+    print(msg)
     return
 
 
