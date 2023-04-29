@@ -8,7 +8,7 @@ class KafkaConsumer():
         
 {% for channel_name, channel in asyncapi.channels() %}
 {% if channel.hasPublish() %}
-{% set messageInfo = {"message_name": channel.publish().message()["message_name"],"message": channel.publish().message()["message"} %}
+{% set messageInfo = {"message_name": channel.publish().message()["message_name"],"message": channel.publish().message()["message"]} %}
 {{"    "}}@on(KafkaAction.{{ messageInfo.message_name | camelCase }})
 {{"    "}}async def on_{{ messageInfo.message_name | capitalize }}(self,{% for name, prop in messageInfo.message.payload().properties() %}{{ name }},{% endfor %}, **kwargs ):
 {{"    "}}{{"    "}}logging.warning("{% for name, prop in message.payload().properties() %}{{ name }}: %s, {% endfor %}", {% for name, prop in messageInfo.message.payload().properties() %}{{ name }}{% endfor %})
