@@ -17,6 +17,6 @@ class KafkaConsumer():
 {{"    "}}{{"    "}}{{"    "}}{{ name }} = {{ name }},
 {% endfor %}
 {{"    "}}{{"    "}})
-{% endif %}
 {% endfor %}
+{% endif %}
 {% endfor %}
