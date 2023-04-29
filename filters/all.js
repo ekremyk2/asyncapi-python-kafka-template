@@ -14,6 +14,13 @@ function getTypeInfo([name, property]) {
 }
 filter.getTypeInfo = getTypeInfo;
 
+function getMessages([messageName, message]) {
+  const ret = [];
+  if (channel.hasPublish()) {
+    ret.push(channel.publish().message());
+  }
+  return ret;
+}
 
 function functionName([channelName, channel]) {
   return getFunctionNameByChannel(channelName, channel);
