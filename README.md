@@ -20,5 +20,5 @@ This template must be used with the AsyncAPI Generator. You can find all availab
 $ npm install -g @asyncapi/generator
 
 # Run the generator with this template
-$ ag https://bit.ly/asyncapi @ekremyk2/python-confluent-kafka-template -o output
+$ ag https://bit.ly/asyncapi @ekremyk2/asyncapi-python-kafka-template -o output
 ```
