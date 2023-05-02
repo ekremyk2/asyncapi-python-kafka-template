@@ -1,7 +1,7 @@
 {
-  "name": "@ekremyk2/python-kafka-template",
+  "name": "@ekremyk2/asyncapi-python-kafka-template",
   "version": "0.2.13",
-  "description": "Python kafka template for the AsyncAPI generator. Custom made for myself.",
+  "description": "Python confluent kafka template for the AsyncAPI generator.",
   "main": "index.js",
   "scripts": {
     "release": "semantic-release",

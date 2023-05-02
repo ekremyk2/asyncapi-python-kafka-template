@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./template/modules/service_utils"
+    ]
+}

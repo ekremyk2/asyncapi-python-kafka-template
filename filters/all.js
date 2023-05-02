@@ -62,6 +62,29 @@ function identifierName(str) {
 }
 filter.identifierName = identifierName;
 
+function getDistinctPayloadsWithSchemaId(asyncapi) {
+  const schemaIds = [];
+  const payloadMap = new Map();
+
+  for(const channel of Object.values(asyncapi.channels())) {
+    try{
+      if(channel.hasSubscribe()) {
+        const subObj = channel.subscribe();
+        const messagePayload = subObj.message().payload();
+        const schemaId = messagePayload.json()['x-parser-schema-id'];
+        if(!payloadMap.has(schemaId)) {
+          schemaIds.push(schemaId);
+          payloadMap.set(schemaId, messagePayload);
+        }
+      }
+    } catch (err) {
+    }
+  }
+  
+  return [...payloadMap];
+}
+filter.getDistinctPayloadsWithSchemaId = getDistinctPayloadsWithSchemaId;
+
 // For files like the streetlights tutorial that don't have schemas, this finds the first anonymous schema in a message payload.
 function anonymousSchema(asyncapi) {
   let ret = null;
