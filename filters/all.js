@@ -9,6 +9,11 @@ const typeMap = {
   "string": "str"
 }
 
+function pascalCase(str) {
+  return _.upperFirst(_.camelCase(str));
+}
+filter.pascalCase = pascalCase;
+
 function getTypeInfo([name, property]) {
   return determineType(name, property);
 }
