@@ -18,7 +18,16 @@
     "asyncapi",
     "generator",
     "python",
-    "kafka"
+    "kafka",
+    "confluent",
+    "template",
+    "asyncapi-generator",
+    "asyncapi-template",
+    "asyncapi-python-kafka-template",
+    "asyncapi-python-template",
+    "asyncapi-kafka-template",
+    "asyncapi-confluent-template",
+    "asyncapi-confluent-kafka-template"
   ],
   "author": "Ekrem Yüksel <ekremyk2@gmail.com> (https://github.com/ekremyk2/)",
   "license": "Apache-2.0",
